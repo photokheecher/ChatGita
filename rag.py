@@ -15,7 +15,7 @@ from langchain.prompts import PromptTemplate  # For setting up prompt templates
 from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline  # For handling transformers models
 
 # Step 1: Load the Bhagavad Gita text
-file_path = "/kaggle/input/bhagwat-gita-in-english/bhagvadnew.txt"
+file_path = "/input/bhagvadnew.txt"
 loader = TextLoader(file_path)  # Load the text file
 pages = loader.load()  # Load the content of the Bhagavad Gita
 print(f"Total pages loaded: {len(pages)}")
@@ -36,7 +36,7 @@ os.environ["HUGGINGFACEHUB_API_TOKEN"] = token_1  # Set the API token in the env
 embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-multilingual-mpnet-base-v2")
 
 # Step 5: Set up Chroma for storing vectors
-persist_directory = '/kaggle/working'  # Define the directory to store the vectors
+persist_directory = '/vectors'  # Define the directory to store the vectors
 vectordb = Chroma.from_documents(documents=splits, embedding=embeddings, persist_directory=persist_directory)
 
 # Check the number of documents in the vector database
